@@ -4,9 +4,13 @@
             <div id="kt_content_container" class="container-xxl">
                 <div class="card">
                     {{-- HEADER CARD --}}
-                    <div class="card-header border-0 pt-3 pb-3">
+                    <div class="card-header border-0 pt-3 pb-3 d-flex justify-content-between">
                         <div class="card-title">
                             تمام سوالات
+                        </div>
+
+                        <div>
+                            <button type="button" class="btn btn-sm btn-primary btn-hover-scale" wire:click="add_questions()">افزودن سوال</button>
                         </div>
                     </div>
 
@@ -26,7 +30,7 @@
                                         @else
                                             افزودن جواب
                                         @endif
-                                        
+
                                     </button>
 
                                     @if ($exam->date > date('Y-m-d') OR ( $exam->date == date('Y-m-d') AND $exam->time > date('H:i:s') ))

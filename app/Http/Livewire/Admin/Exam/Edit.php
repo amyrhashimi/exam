@@ -22,6 +22,8 @@ class Edit extends Component
     public $newExams;
     public $questions = [];
 
+    public $redirect = null;
+
     public function mount()
     {
         $this->exams = Question::where('exam_id', $this->exam->id)->orderByDesc('id')->get();
@@ -33,6 +35,11 @@ class Edit extends Component
         $this->date = $this->exam->date;
         $this->time = $this->exam->time;
         $this->period = $this->exam->period;
+
+        if( isset(request()->redirect) && ! is_null(request()->redirect) && request()->redirect == 1 )
+            $this->redirect = true;
+        else
+            $this->redirect = false;
     }
 
     protected $rules = [
@@ -52,7 +59,7 @@ class Edit extends Component
 
     public function cansel()
     {
-        return redirect()->route('exams');
+        $this->redirect ? redirect()->route('exams.questions', $this->exam->id) : redirect()->route('exams');
     }
 
     public function updated($name)
@@ -69,9 +76,9 @@ class Edit extends Component
     public function update()
     {
 
-        if ($this->exam->date < date('Y-m-d') OR ( $this->exam->date == date('Y-m-d') AND $this->exam->time < date('H:i:s') )) {
+        if ($this->exam->date < date('Y-m-d') OR ( $this->exam->date == date('Y-m-d') AND $this->exam->time < date('H:i:s') ))
             return redirect()->route('exams')->with('error', 'امتحان شروع شده است.');
-        }
+
 
         $this->validate();
         $this->exam->update([
@@ -90,6 +97,8 @@ class Edit extends Component
             }
         }
 
-        return redirect()->route('exams')->with('success', 'امتحان با موفقیت ویرایش شد.');
+        $this->redirect
+            ? redirect()->route('exams.questions', $this->exam->id)->with('success', 'امتحان با موفقیت ویرایش شد.')
+            : redirect()->route('exams')->with('success', 'امتحان با موفقیت ویرایش شد.');
     }
 }

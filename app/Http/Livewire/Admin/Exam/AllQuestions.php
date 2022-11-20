@@ -30,6 +30,11 @@ class AllQuestions extends Component
         return redirect()->route('exams');
     }
 
+    public function add_questions()
+    {
+        return redirect()->route('exams.edit', ['exam' => $this->exam->id , 'redirect' => true]);
+    }
+
     public function destroy(Question $question)
     {
         foreach ($question->results()->get() as $value) {
