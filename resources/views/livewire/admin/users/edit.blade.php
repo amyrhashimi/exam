@@ -6,7 +6,7 @@
         <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
             <!--begin::Card title-->
             <div class="card-title m-0">
-                <h3 class="fw-bolder m-0">ویرایش کاربر</h3>
+                <h3 class="fw-bolder m-0">@lang('users.editUser')</h3>
             </div>
             <!--end::Card title-->
         </div>
@@ -22,7 +22,7 @@
                     <div class="row mb-6">
                         <!--begin::Label-->
                         <label class="col-lg-4 col-form-label fw-bold fs-6">
-                            <span>نام و نام خانوادگی </span>
+                            <span> @lang('users.nameFamily') </span>
                         </label>
                         <!--end::Label-->
                         <!--begin::Col-->
@@ -58,7 +58,7 @@
                     <div class="row mb-6">
                         <!--begin::Label-->
                         <label class="col-lg-4 col-form-label fw-bold fs-6">
-                            <span>نام کاربری</span>
+                            <span>@lang('users.username')</span>
                         </label>
                         <!--end::Label-->
                         <!--begin::Col-->
@@ -78,7 +78,7 @@
                     <div class="row mb-6">
                         <!--begin::Label-->
                         <label class="col-lg-4 col-form-label fw-bold fs-6">
-                            <span>ایمیل</span>
+                            <span>@lang('users.email')</span>
                         </label>
                         <!--end::Label-->
                         <!--begin::Col-->
@@ -98,7 +98,7 @@
                     <div class="row mb-6">
                         <!--begin::Label-->
                         <label class="col-lg-4 col-form-label fw-bold fs-6">
-                            <span>تلفن همراه</span>
+                            <span>@lang('users.phone')</span>
                         </label>
                         <!--end::Label-->
                         <!--begin::Col-->
@@ -118,8 +118,8 @@
                 <!--end::Card body-->
                 <!--begin::Actions-->
                 <div class="card-footer d-flex justify-content-end py-6 px-9">
-                    <button wire:click="cansel" type="button" class="btn btn-light btn-active-light-primary btn-hover-scale btn-sm me-2">انصراف</button>
-                    <button type="submit" class="btn btn-primary btn-hover-scale btn-sm" id="kt_account_profile_details_submit">ویرایش</button>
+                    <button wire:click="cansel" type="button" class="btn btn-light btn-active-light-primary btn-hover-scale btn-sm me-2">@lang('users.cancel')</button>
+                    <button type="submit" class="btn btn-primary btn-hover-scale btn-sm" id="kt_account_profile_details_submit">@lang('users.edit')</button>
                 </div>
                 <!--end::Actions-->
                 <input type="hidden"><div></div></form>

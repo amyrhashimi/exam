@@ -10,14 +10,17 @@ class AddResults extends Component
 {
 
     public Question $question;
-    public $resultsOld;
+    public $results;
+    public $correct;
 
     protected $rules = [
-        'resultsOld.*.answer' => 'required',
-        'resultsOld.*.correct' => 'nullable|boolean',
-        'resultsOld.*.question_id' => 'required'
+        'results.*.answer' => 'required',
+        'results.*.correct' => 'nullable|boolean',
+        'results.*.question_id' => 'required',
+
+        'correct' => 'required',
     ];
-    
+
     public function updated($name)
     {
         $this->validateOnly($name);
@@ -25,7 +28,13 @@ class AddResults extends Component
 
     public function mount()
     {
-        $this->resultsOld = Result::where('question_id', $this->question->id)->get();
+        $this->results = Result::where('question_id', $this->question->id)->get();
+
+        foreach ($this->results as $key => $value) {
+            if($value->correct == 1){
+                $this->correct = $key+1;
+            }
+        }
     }
 
     public function render()
@@ -35,24 +44,39 @@ class AddResults extends Component
 
     public function addResult()
     {
-        $this->resultsOld->push( new Result(['question_id' => $this->question->id]) );
+        $this->results->push( new Result(['question_id' => $this->question->id]) );
     }
 
     public function Results()
     {
         $this->validate();
 
-        foreach ( $this->resultsOld as $item) {
+        foreach ( $this->results as $index => $item) {
 
-            if($item->correct == null)
-            {
-                unset($item->correct);
+            if( $item->correct == 1 && $index+1 !== $this->correct ){
+                 //  در صورتی که قبلا جواب صحیح بوده و تغییر کرده است
+                if ( $item->id !== null ) {
+                    $item->update([
+                        'correct' => 0
+                    ]);
+                }
             }
+            elseif( $item->correct !== null && $index+1 == $this->correct ){
+                // در صورتی که قبلا جواب صحیح نبوده و الان جواب صحیح است
+                if ( $item->id !== null ) {
+                    $item->update([
+                        'correct' => 1
+                    ]);
+                }
+            }elseif (  is_null($item->correct) && !isset($item->id) ) {
+                if ($index+1 == $this->correct) $item->correct = 1;
+                else $item->correct = 0;
 
-            $item->save();
+                $item->save();
+            }
         }
 
-        return redirect()->route('exams.questions', $this->question->exam_id )->with('success', 'جواب ها با موفقیت ذخیره شد');
+        return redirect()->route('exams.addResults', $this->question->id )->with('success', 'جواب ها با موفقیت ذخیره شد');
     }
 
     public function comeBack()
@@ -62,11 +86,9 @@ class AddResults extends Component
 
     public function destroy($index)
     {
-        $result = $this->resultsOld[$index];
-        $this->resultsOld->forget($index);
+        $result = $this->results[$index];
+        $this->results->forget($index);
 
         $result->delete();
-
-        return redirect()->route('exams.addResults', $this->question->id)->with('success', 'جواب با موفقیت حذف شد.');
     }
 }

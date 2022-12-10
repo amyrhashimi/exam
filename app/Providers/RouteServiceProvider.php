@@ -29,20 +29,24 @@ class RouteServiceProvider extends ServiceProvider
         $this->configureRateLimiting();
 
         $this->routes(function () {
+
+            // app()->setLocale( request()->segment(1) );
+
             Route::middleware('api')
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
 
             Route::middleware('web')
+                // ->prefix( app()->getLocale() )
                 ->group(base_path('routes/web/web.php'));
 
             // Web->Admin
             Route::middleware(['web', 'auth', 'isAdmin'])
-                ->prefix('/admin')
+                ->prefix(  /* app()->getLocale()  .*/ '/admin')
                 ->group(base_path('routes/web/admin.php'));
             // Web->Portal
             Route::middleware(['web', 'auth'])
-                ->prefix('/portal')
+                ->prefix( /*app()->getLocale() .*/ '/portal')
                 ->group(base_path('routes/web/portal.php'));
         });
     }

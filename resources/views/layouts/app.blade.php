@@ -1,11 +1,20 @@
+@php
+    $lang = \App\Models\Language::where('language', app()->getLocale() )->first();
+@endphp
 <!doctype html>
-<html lang="en" dir="rtl">
+<html lang="{{ $lang->language }}" dir="{{ $lang->dir }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/css/style.bundle.rtl.css') }}" rel="stylesheet" type="text/css" />
+
+    @if ($lang->dir == 'rtl')
+        <link href="{{ asset('assets/css/style.bundle.rtl.css') }}" rel="stylesheet" type="text/css" />
+    @else
+        <link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+    @endif
+
     <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet" type="text/css" />
 
     <!-- Cdn Sweet Alert -->
@@ -30,11 +39,11 @@
                 {{ $slot }}
 
                 <!--begin::Footer-->
-                <div class="footer py-4 d-flex flex-lg-column header align-items-center " id="kt_footer" style="bottom: 0 !important; top: unset;">
+                <div class="py-4 d-flex flex-lg-column align-items-center mt-5" id="kt_footer">
                     <div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-center">
                         <!--begin::Copyright-->
                         <div class="text-dark order-2 order-md-1">
-                            <a href="https://alimajidi.com" target="_blank" class="text-gray-800 text-hover-primary">CopyRight © 2022 Imen Safar. all rights reserved</a>
+                            <a href="https://alimajidi.com" target="_blank" class="text-gray-800 text-hover-primary">CopyRight © 2022 Exam. all rights reserved</a>
                         </div>
                         <!--end::Copyright-->
                     </div>

@@ -51,15 +51,16 @@ class HomeController extends Controller
             'password' => 'required|min:8|max:100'
         ]);
 
+
         if (filter_var($validate['username'], FILTER_VALIDATE_EMAIL) ) {
             if(Auth::attempt([ 'email' => $validate['username'], 'password' => $validate['password'] ]))
             {
                 request()->session()->regenerate();
 
                 if (auth()->user()->isAdmin == 1)
-                    return redirect()->intended('/admin');
+                    return redirect()->intended( request()->segment(1) . '/admin');
                 else
-                    return redirect()->intended('/portal');
+                    return redirect()->intended( request()->segment(1) . '/portal');
             }
             else {
                     $request->validate([
@@ -76,9 +77,9 @@ class HomeController extends Controller
                 request()->session()->regenerate();
 
                 if (auth()->user()->isAdmin == 1)
-                    return redirect()->intended('/admin');
+                    return redirect()->intended( request()->segment(1) . '/admin');
                 else
-                    return redirect()->intended('/portal');
+                    return redirect()->intended( request()->segment(1) . '/portal');
 
             }else {
                 $request->validate([

@@ -11,7 +11,7 @@
                     <div class="card-header border-0 pt-6">
                         <!--begin::Card title-->
                         <div class="card-title">
-                            ساخت درس جدید
+                            @lang('lessons.create')
                         </div>
                         <!--begin::Card title-->
                     </div>
@@ -22,7 +22,7 @@
                             <div class="row mb-6">
                                 <!--begin::Label-->
                                 <label class="col-lg-4 col-form-label fw-bold fs-6">
-                                    <span class="required">عنوان و عنوان لاتین</span>
+                                    <span class="required">@lang('lessons.titleSlug')</span>
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
@@ -30,7 +30,7 @@
 
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control form-control-solid mb-3 mb-lg-0 @error('title') border-danger @enderror" placeholder="عنوان" wire:model.debounce.lazy="title" />
+                                            <input type="text" class="form-control form-control-solid mb-3 mb-lg-0 @error('title') border-danger @enderror" placeholder="@lang('lessons.title')" wire:model.debounce.lazy="title" />
                                             <div class="fv-plugins-message-container invalid-feedback"></div>
 
                                             @error('title')
@@ -39,7 +39,7 @@
                                         </div>
 
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control form-control-solid mb-3 mb-lg-0 @error('slug') border-danger @enderror" placeholder="عنوان لاتین" wire:model.debounce.lazy="slug" />
+                                            <input type="text" class="form-control form-control-solid mb-3 mb-lg-0 @error('slug') border-danger @enderror" placeholder="@lang('lessons.slug')" wire:model.debounce.lazy="slug" />
                                             <div class="fv-plugins-message-container invalid-feedback"></div>
 
                                             @error('slug')
@@ -73,9 +73,9 @@
                             </div>
                             <!--end::Input group-->
 
-                            <button type="submit" class="btn btn-success btn-sm btn-hover-scale">ذخیره</button>
+                            <button type="submit" class="btn btn-success btn-sm btn-hover-scale">@lang('lessons.save')</button>
 
-                            <button type="button" class="btn btn-sm btn-danger btn-hover-scale ms-2" wire:click="cansel">انصراف</button>
+                            <button type="button" class="btn btn-sm btn-danger btn-hover-scale ms-2" wire:click="cansel">@lang('lessons.cancel')</button>
                         </form>
                     </div>
                     <!--end::Card body-->

@@ -2,7 +2,9 @@
 
 namespace App\Http\Livewire\Portal\Exam;
 
+use App\Models\Answer;
 use App\Models\Exam;
+use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -41,6 +43,12 @@ class Index extends Component
 
         auth()->user()->exams()->attach($exam->id);
 
+        Answer::create([
+            'user_id' => auth()->user()->id,
+            'exam_id' => $exam->id
+        ]);
+
+        Session::has('questions') ? Session::forget('questions') : '';
 
         return redirect()->route('exams.single', $exam->slug)->with('success', 'امتحان را شروع کنید و دقت کنید که صفحه را نبندید.');
     }

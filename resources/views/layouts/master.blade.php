@@ -1,13 +1,29 @@
+@php
+    $lang = \App\Models\Language::where('language', app()->getLocale() )->first();
+@endphp
 <!DOCTYPE html>
-<html lang="en" dir="rtl">
+<html lang="{{ $lang->language }}" dir="{{ $lang->dir }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Exam @yield('title')</title>
     <link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/css/style.bundle.rtl.css') }}" rel="stylesheet" type="text/css" />
+    @if ($lang->dir == 'rtl')
+        <link href="{{ asset('assets/css/style.bundle.rtl.css') }}" rel="stylesheet" type="text/css" />
+    @else
+        <link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+    @endif
     <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet" type="text/css" />
+
+    <style>
+        @media only screen and (max-width: 992px) {
+            #main .col-lg-6{
+                border-left: unset !important;
+                border-right: unset !important;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -20,7 +36,7 @@
             @yield('content')
         </div>
     </div>
-    
+
 
     <script>var hostUrl = "/assets/";</script>
     <script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>

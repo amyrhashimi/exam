@@ -12,8 +12,11 @@ class Create extends Component
     public $slug;
     public $lesson_id;
     public $date;
+    public $date_end;
     public $time;
+    public $time_end;
     public $period;
+    public $random;
 
     public $exams;
     public $questions = [];
@@ -27,12 +30,15 @@ class Create extends Component
         'title' => 'required|min:3',
         'slug' => 'required|min:3',
         'date' => 'required|date',
+        'date_end' => 'required|date',
         'time' => 'required',
+        'time_end' => 'required',
         'period' => 'required|int',
+        'random' => 'required|int',
         'lesson_id' => 'required|exists:lessons,id',
 
         'questions.0.title' => 'required|min:3|string',
-        'questions.0.score' => 'required|int',
+        'questions.0.score' => 'nullable|int',
 
         'questions.*.title' => 'nullable|min:3|string',
         'questions.*.score' => 'nullable|int',
@@ -62,8 +68,11 @@ class Create extends Component
             'title' => $this->title,
             'slug' => $this->slug,
             "date" => $this->date,
+            "date_end" => $this->date_end,
             "time" => $this->time,
+            "time_end" => $this->time_end,
             "period" => $this->period,
+            "random" => $this->random,
         ]);
 
         foreach ($this->questions as $value) {
@@ -74,7 +83,8 @@ class Create extends Component
             $exam->questions()->create(['title' => $value['title'] , 'score' => $value['score'] ]);
         }
 
-        return redirect()->route('exams')->with('success', 'امتحان با موفقیت ثبت شد و باید سوالات را تنظیم کنید.');
+        return redirect()->route('exams.questions', $exam->id);
+        // return redirect()->route('exams')->with('success', 'امتحان با موفقیت ثبت شد و باید سوالات را تنظیم کنید.');
     }
 
     public function cansel()

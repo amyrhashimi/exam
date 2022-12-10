@@ -18,11 +18,11 @@
                     <!--begin::Heading-->
                     <div class="mb-10 text-center">
                         <!--begin::Title-->
-                        <h1 class="text-dark mb-3">ثبت نام </h1>
+                        <h1 class="text-dark mb-3"> @lang('register.register') </h1>
                         <!--end::Title-->
                         <!--begin::Link-->
-                        <div class="text-gray-400 fw-bold fs-4">از قبل حساب کاربری دارید؟
-                            <a href="{{ route('login') }}" class="link-primary ">اینجا وارد شوید</a></div>
+                        <div class="text-gray-400 fw-bold fs-4"> @lang('register.text')
+                            <a href="{{ route('login') }}" class="link-primary "> @lang('register.click') </a></div>
                         <!--end::Link-->
                     </div>
                     <!--end::Heading-->
@@ -31,7 +31,7 @@
                     <div class="row fv-row mb-7">
                         <!--begin::Col-->
                         <div class="col-xl-6">
-                            <label class="form-label  text-dark fs-6">نام </label>
+                            <label class="form-label  text-dark fs-6"> @lang('register.name')  </label>
                             <input class="form-control form-control-lg form-control-solid" type="text" name="name" autocomplete="off" value="{{ old('name') }}" />
                             @error('name')
                                 <div class="fv-plugins-message-container invalid-feedback"><div data-field="first-name" data-validator="notEmpty">{{ $message }}</div></div>
@@ -40,7 +40,7 @@
                         <!--end::Col-->
                         <!--begin::Col-->
                         <div class="col-xl-6">
-                            <label class="form-label  text-dark fs-6">نام خانوادگی</label>
+                            <label class="form-label  text-dark fs-6"> @lang('register.family') </label>
                             <input class="form-control form-control-lg form-control-solid" type="text" name="family" autocomplete="off"  value="{{ old('family') }}" />
                             @error('family')
                             <div class="fv-plugins-message-container invalid-feedback"><div data-field="first-name" data-validator="notEmpty">{{ $message }}</div></div>
@@ -53,7 +53,7 @@
                       <!--begin::Input group-->
                       <div class="row fv-row mb-7">
                         <!--begin::Col-->
-                            <label class="form-label  text-dark fs-6">نام کاربری </label>
+                            <label class="form-label  text-dark fs-6"> @lang('register.username')  </label>
                             <input class="form-control form-control-lg form-control-solid" name="username" id="kt_inputmask_11" inputmode="text" value="{{ old('username') }}">
                             @error('username')
                                 <div class="fv-plugins-message-container invalid-feedback"><div data-field="first-name" data-validator="notEmpty">{{ $message }}</div></div>
@@ -64,7 +64,7 @@
                     <!--begin::Input group-->
                     <div class="row fv-row mb-7">
                         <!--begin::Col-->
-                            <label class="form-label  text-dark fs-6">تلفن همراه </label>
+                            <label class="form-label  text-dark fs-6"> @lang('register.phone')  </label>
                             <input class="form-control form-control-lg form-control-solid" name="phone" id="kt_inputmask_11" inputmode="text" value="{{ old('phone') }}">
                             @error('phone')
                                 <div class="fv-plugins-message-container invalid-feedback"><div data-field="first-name" data-validator="notEmpty">{{ $message }}</div></div>
@@ -75,7 +75,7 @@
                     <!--begin::Input group-->
                     <div class="row fv-row mb-7">
                         <!--begin::Col-->
-                            <label class="form-label  text-dark fs-6">ایمیل (اختیاری) </label>
+                            <label class="form-label  text-dark fs-6">  @lang('register.email')  </label>
                             <input class="form-control form-control-lg form-control-solid" type="email" name="email" value="{{ old('email') }}">
                             @error('email')
                             <div class="fv-plugins-message-container invalid-feedback"><div data-field="first-name" data-validator="notEmpty">{{ $message }}</div></div>
@@ -83,14 +83,14 @@
 
                     </div>
                     <!--end::Input group-->
-                    
+
 
                     <!--begin::Input group-->
                     <div class="mb-10 fv-row" data-kt-password-meter="true">
                         <!--begin::Wrapper-->
                         <div class="mb-1">
                             <!--begin::Label-->
-                            <label class="form-label  text-dark fs-6">کلمه عبور</label>
+                            <label class="form-label  text-dark fs-6"> @lang('register.password') </label>
                             <!--end::Label-->
                             <!--begin::Input wrapper-->
                             <div class="position-relative mb-3">
@@ -120,9 +120,7 @@
                     <!--begin::Actions-->
                     <div>
                         <button type="submit" id="kt_sign_up_submit" class="btn btn-lg btn-primary">
-                            <span class="indicator-label">ارسال</span>
-                            <span class="indicator-progress">لطفا صبر کنید...
-									<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                            <span class="indicator-label"> @lang('register.send') </span>
                         </button>
                     </div>
                     <!--end::Actions-->

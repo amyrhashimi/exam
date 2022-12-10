@@ -6,11 +6,11 @@
                     {{-- HEADER CARD --}}
                     <div class="card-header border-0 pt-3 pb-3 d-flex justify-content-between">
                         <div class="card-title">
-                            تمام سوالات
+                            @lang('examAdmin.questions')
                         </div>
 
                         <div>
-                            <button type="button" class="btn btn-sm btn-primary btn-hover-scale" wire:click="add_questions()">افزودن سوال</button>
+                            <button type="button" class="btn btn-sm btn-primary btn-hover-scale" wire:click="add_questions()">@lang('examAdmin.addQuestion')</button>
                         </div>
                     </div>
 
@@ -26,15 +26,15 @@
 
                                     <button type="button" wire:click="addResult({{ $question->id }})" class="btn btn-primary btn-sm btn-hover-scale">
                                         @if ($exam->date < date('Y-m-d') OR ( $exam->date == date('Y-m-d') AND $exam->time < date('H:i:s') ))
-                                            مشاهده جواب ها
+                                            @lang('examAdmin.showQuestion')
                                         @else
-                                            افزودن جواب
+                                            @lang('examAdmin.addResult')
                                         @endif
 
                                     </button>
 
                                     @if ($exam->date > date('Y-m-d') OR ( $exam->date == date('Y-m-d') AND $exam->time > date('H:i:s') ))
-                                        <button type="button" wire:click="destroy({{ $question->id }})" class="btn btn-danger btn-sm btn-hover-scale">حذف سوال</button>
+                                        <button type="button" wire:click="destroy({{ $question->id }})" class="btn btn-danger btn-sm btn-hover-scale">@lang('examAdmin.deleteQuestion')</button>
                                     @endif
 
                                 </div>
@@ -43,7 +43,7 @@
                             </div>
                         @endforeach
 
-                        <button type="button" class="btn btn-sm btn-light btn-active-light-primary btn-hover-scale ms-2" wire:click="comeBack()">بازگشت</button>
+                        <button type="button" class="btn btn-sm btn-light btn-active-light-primary btn-hover-scale ms-2" wire:click="comeBack()">@lang('examAdmin.back')</button>
                     </div>
                 </div>
             </div>

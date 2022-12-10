@@ -11,7 +11,7 @@
                     <div class="card-header border-0 pt-6">
                         <!--begin::Card title-->
                         <div class="card-title">
-                            تمام درس ها
+                            @lang('lessons.lessons')
                         </div>
                         <!--begin::Card title-->
                         <!--begin::Card toolbar-->
@@ -25,11 +25,11 @@
                                     </select>
                                 </div>
                                 <div class="col-auto">
-                                    <input type="text" class="form-control" placeholder="نام درس را جستجو کنید ..." wire:model="lesson">
+                                    <input type="text" class="form-control" placeholder=" @lang('lessons.search') " wire:model="lesson">
                                 </div>
 
                                 <div class="col-auto">
-                                    <button type="button" class="btn btn-primary" wire:click="create"> ساخت درس جدید </button>
+                                    <button type="button" class="btn btn-primary" wire:click="create"> @lang('lessons.create') </button>
                                 </div>
                             </div>
 
@@ -44,10 +44,10 @@
                             <thead>
                             <!--begin::Table row-->
                             <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                                <th class="min-w-125px">نام</th>
-                                <th class="min-w-125px">نام لاتین</th>
-                                <th class="min-w-125px">توضیحات</th>
-                                <th class="text-end min-w-100px">عملیات</th>
+                                <th class="min-w-125px">@lang('lessons.title')</th>
+                                <th class="min-w-125px">@lang('lessons.slug')</th>
+                                <th class="min-w-125px">@lang('lessons.desc')</th>
+                                <th class="text-end min-w-100px">@lang('lessons.option')</th>
                             </tr>
                             <!--end::Table row-->
                             </thead>
@@ -88,7 +88,7 @@
                                     <!--begin::Action=-->
                                     <td class="text-end">
                                         <a href="#" class="btn btn-light btn-active-light-primary btn-sm"
-                                           data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">عملیات
+                                           data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">@lang('lessons.option')
                                             <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
                                             <span class="svg-icon svg-icon-5 m-0">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -106,7 +106,7 @@
                                             data-kt-menu="true">
                                             <!--begin::Menu item-->
                                             <div class="menu-item px-3">
-                                                <span class="menu-link px-3" wire:click="edit({{ $lesson->id }})">ویرایش</span>
+                                                <span class="menu-link px-3" wire:click="edit({{ $lesson->id }})">@lang('lessons.edit')</span>
                                             </div>
                                             <!--end::Menu item-->
 
@@ -117,7 +117,7 @@
                                                     @method('DELETE')
                                                 </form>
 
-                                                <span class="menu-link px-3" onclick="document.getElementById('delete-lesson-{{ $lesson->id }}').submit()" data-kt-users-table-filter="delete_row">حذف</span>
+                                                <span class="menu-link px-3" onclick="document.getElementById('delete-lesson-{{ $lesson->id }}').submit()" data-kt-users-table-filter="delete_row">@lang('lessons.delete')</span>
                                             </div>
                                             <!--end::Menu item-->
                                         </div>

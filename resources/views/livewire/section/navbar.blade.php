@@ -23,45 +23,49 @@
                     <div class="menu menu-lg-rounded menu-column menu-lg-row menu-state-bg menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch" id="#kt_header_menu" data-kt-menu="true">
                         <div class="menu-item me-lg-1">
 
-                            @if (request()->segment(1) == 'admin')
+                            @if ( auth()->check() && auth()->user()->isAdmin == 1 && request()->segment(2) == 'admin')
                                 <div class="menu-item me-lg-1">
                                     <a class="menu-link py-3" href="{{ route('users') }}">
-                                        <span class="menu-title">کاربران</span>
+                                        <span class="menu-title">@lang('nav.users')</span>
                                     </a>
                                 </div>
 
                                 <div class="menu-item me-lg-1">
                                     <a class="menu-link py-3" href="{{ route('exams') }}">
-                                        <span class="menu-title">امتحان ها</span>
+                                        <span class="menu-title">@lang('nav.exams')</span>
                                     </a>
                                 </div>
 
                                 <div class="menu-item me-lg-1">
                                     <a class="menu-link py-3" href="{{ route('lessons') }}">
-                                        <span class="menu-title">درس ها</span>
+                                        <span class="menu-title">@lang('nav.lessons')</span>
                                     </a>
                                 </div>
-                            @elseif (request()->segment(1) == 'portal')
+                            @elseif ( auth()->check() && auth()->user()->isAdmin == 0 && request()->segment(1) == 'portal')
                                 <div class="menu-item me-lg-1">
                                     <a class="menu-link py-3" href="{{ route('exams.all') }}">
-                                        <span class="menu-title">امتحان ها</span>
+                                        <span class="menu-title">@lang('nav.exams')</span>
                                     </a>
                                 </div>
 
                                 <div class="menu-item me-lg-1">
                                     <a class="menu-link py-3" href="{{ route('records') }}">
-                                        <span class="menu-title">کارنامه ها</span>
+                                        <span class="menu-title">@lang('nav.records')</span>
                                     </a>
                                 </div>
                             @else
-                                <a class="menu-link py-3" href="{{ route('home') }}">
-                                    <span class="menu-title">صفحه اصلی</span>
-                                </a>
+                                <div class="menu-item me-lg-1">
+                                    <a class="menu-link py-3" href="{{ route('home') }}">
+                                        <span class="menu-title">@lang('nav.home')</span>
+                                    </a>
+                                </div>
 
                                 @auth
-                                    <a class="menu-link py-3" href="#">
-                                        <span class="menu-title">داشبورد</span>
+                                <div class="menu-item me-lg-1">
+                                    <a class="menu-link py-3" href="{{ auth()->user()->isAdmin == 1 ? route('admin') : route('portal') }}">
+                                        <span class="menu-title">@lang('nav.dashboard')</span>
                                     </a>
+                                </div>
                                 @endauth
                             @endif
 
@@ -99,35 +103,34 @@
 
                                 <div class="separator my-2"></div>
 
-                                @if (request()->segment(1) == 'admin')
+                                @if (auth()->user()->isAdmin == 1 )
                                     <div class="menu-item px-5">
-                                        <a href="{{ route('users') }}" class="menu-link px-5">کاربران</a>
+                                        <a href="{{ route('users') }}" class="menu-link px-5">@lang('nav.users')</a>
                                     </div>
 
                                     <div class="menu-item px-5">
-                                        <a href="{{ route('exams') }}" class="menu-link px-5">امتحان ها</a>
+                                        <a href="{{ route('exams') }}" class="menu-link px-5">@lang('nav.exams')</a>
                                     </div>
 
                                     <div class="menu-item px-5">
-                                        <a href="{{ route('lessons') }}" class="menu-link px-5">درس ها</a>
+                                        <a href="{{ route('lessons') }}" class="menu-link px-5">@lang('nav.lessons')</a>
                                     </div>
 
-                                @elseif (request()->segment(1) == 'portal')
-                                    <div class="menu-item px-5">
-                                        <a href="{{ route('exams.all') }}" class="menu-link px-5">امتحان ها</a>
-                                    </div>
-
-                                    <div class="menu-item px-5">
-                                        <a href="{{ route('records') }}" class="menu-link px-5">کارنامه ها</a>
-                                    </div>
                                 @else
+                                    <div class="menu-item px-5">
+                                        <a href="{{ route('exams.all') }}" class="menu-link px-5">@lang('nav.exams')</a>
+                                    </div>
+
+                                    <div class="menu-item px-5">
+                                        <a href="{{ route('records') }}" class="menu-link px-5">@lang('nav.records')</a>
+                                    </div>
 
                                 @endif
 
                                 <div class="separator my-2"></div>
 
                                 <div class="menu-item px-5">
-                                    <a href="{{ route('logout') }}" class="menu-link px-5">خروج</a>
+                                    <a href="{{ route('logout') }}" class="menu-link px-5">@lang('nav.logout')</a>
                                 </div>
 
                             </div>

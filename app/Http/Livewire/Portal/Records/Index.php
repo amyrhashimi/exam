@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Portal\Records;
 
+use App\Models\Answer;
 use App\Models\Exam;
 use Livewire\Component;
 
@@ -16,9 +17,9 @@ class Index extends Component
     {
         $exams = auth()->user()->exams()->latest();
 
-        if (! is_null( $this->search )){
+
+        if (! is_null( $this->search ))
             $exams = $exams->where('title', 'like', '%' . $this->search . '%');
-        }
 
         $exams = $exams->paginate($this->paginate);
 

@@ -1,17 +1,17 @@
 <div>
     <!--begin::Content-->
-    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <div class="d-flex flex-column flex-column-fluid" id="kt_content">
         <!--begin::Post-->
         <div class="post d-flex flex-column-fluid" id="kt_post">
             <!--begin::Container-->
             <div id="kt_content_container" class="container-xxl">
                 <!--begin::Card-->
-                <div class="card">
+                <div class="card mt-10">
                     <!--begin::Card header-->
                     <div class="card-header border-0 pt-6">
                         <!--begin::Card title-->
                         <div class="card-title">
-                            تمام کاربران
+                            @lang('users.all')
                         </div>
                         <!--begin::Card title-->
                         <!--begin::Card toolbar-->
@@ -19,9 +19,9 @@
                             <div class="row">
                                 <div class="col-auto">
                                     <select class="form-control" wire:model="type">
-                                        <option value="">همه</option>
-                                        <option value="0">کاربران</option>
-                                        <option value="1">ادمین ها</option>
+                                        <option value="">@lang('users.all')</option>
+                                        <option value="0">@lang('users.users')</option>
+                                        <option value="1">@lang('users.admins')</option>
                                     </select>
                                 </div>
                                 <div class="col-auto">
@@ -38,19 +38,20 @@
                     </div>
                     <!--begin::Card body-->
                     <div class="card-body pt-0">
+                        <div class="table-responsive">
                         <!--begin::Table-->
                         <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_users">
                             <!--begin::Table head-->
                             <thead>
                             <!--begin::Table row-->
                             <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                                <th class="min-w-125px">نام</th>
-                                <th class="min-w-125px">نام خانوادگی</th>
-                                <th class="min-w-125px">نام کاربری</th>
-                                <th class="min-w-125px">ایمیل</th>
-                                <th class="min-w-125px">موقعیت</th>
-                                <th class="min-w-125px">تلفن همراه</th>
-                                <th class="text-end min-w-100px">عملیات</th>
+                                <th class="min-w-125px">@lang('users.name')</th>
+                                <th class="min-w-125px">@lang('users.family')</th>
+                                <th class="min-w-125px">@lang('users.username')</th>
+                                <th class="min-w-125px">@lang('users.email')</th>
+                                <th class="min-w-125px">@lang('users.status')</th>
+                                <th class="min-w-125px">@lang('users.phone')</th>
+                                <th class="text-end min-w-100px">@lang('users.option')</th>
                             </tr>
                             <!--end::Table row-->
                             </thead>
@@ -92,16 +93,16 @@
                                         @if($user->email !== null)
                                             {{ $user->email }}
                                         @else
-                                            <div class="badge badge-warning fw-bolder"> ایملی ندارد </div>
+                                            <div class="badge badge-warning fw-bolder"> @lang('users.notEmail') </div>
                                         @endif
                                     </td>
                                     <!--end::Two step=-->
                                     <!--begin::Joined-->
                                     <td>
                                         @if($user->isAdmin == 1)
-                                            <div class="badge badge-light fw-bolder"> ادمین </div>
+                                            <div class="badge badge-light fw-bolder"> @lang('users.admin') </div>
                                         @else
-                                            <div class="badge badge-light fw-bolder"> کاربر </div>
+                                            <div class="badge badge-light fw-bolder"> @lang('users.user') </div>
                                         @endif
                                     </td>
                                     <!--begin::Joined-->
@@ -115,7 +116,7 @@
                                     <!--begin::Action=-->
                                     <td class="text-end">
                                         <a href="#" class="btn btn-light btn-active-light-primary btn-sm"
-                                           data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">عملیات
+                                           data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">@lang('users.option')
                                             <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
                                             <span class="svg-icon svg-icon-5 m-0">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -133,7 +134,7 @@
                                             data-kt-menu="true">
                                             <!--begin::Menu item-->
                                             <div class="menu-item px-3">
-                                                <span class="menu-link px-3" wire:click="edit({{ $user->id }})">ویرایش</span>
+                                                <span class="menu-link px-3" wire:click="edit({{ $user->id }})">@lang('users.edit')</span>
                                             </div>
                                             <!--end::Menu item-->
 
@@ -144,7 +145,7 @@
                                                     @method('DELETE')
                                                 </form>
 
-                                                <span class="menu-link px-3" onclick="document.getElementById('delete-user-{{ $user->id }}').submit()" data-kt-users-table-filter="delete_row">حذف</span>
+                                                <span class="menu-link px-3" onclick="document.getElementById('delete-user-{{ $user->id }}').submit()" data-kt-users-table-filter="delete_row">@lang('users.delete')</span>
                                             </div>
                                             <!--end::Menu item-->
                                         </div>
@@ -159,6 +160,7 @@
                             <!--end::Table body-->
                         </table>
                         <!--end::Table-->
+                        </div>
 
                         <ul class="pagination pagination-rounded justify-content-end my-2">
                             {{ $users->appends( request()->query() )->links() }}

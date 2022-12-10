@@ -1,6 +1,6 @@
 <div id="kt_aside" class="aside aside-dark aside-hoverable" data-kt-drawer="true" data-kt-drawer-name="aside" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_aside_mobile_toggle">
     <div class="aside-logo flex-column-auto" id="kt_aside_logo">
-        <a href="#">
+        <a href="{{ auth()->user()->isAdmin == 1 ? route('admin') : route('portal') }}">
             <img alt="Logo" src="/assets/media/logos/logo-1-dark.png" class="h-25px logo" />
         </a>
 
@@ -18,7 +18,7 @@
         <div class="hover-scroll-overlay-y my-5 my-lg-5" id="kt_aside_menu_wrapper" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_aside_logo, #kt_aside_footer" data-kt-scroll-wrappers="#kt_aside_menu" data-kt-scroll-offset="0">
             <div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500" id="#kt_aside_menu" data-kt-menu="true">
                 <div class="menu-item">
-                    <a class="menu-link" href="{{ request()->segment(1) == 'admin' ? route('admin') : route('portal') }}">
+                    <a class="menu-link" href="{{ auth()->user()->isAdmin == 1 ? route('admin') : route('portal') }}">
                         <span class="menu-icon">
                             <span class="svg-icon svg-icon-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -29,11 +29,11 @@
                                 </svg>
                             </span>
                         </span>
-                        <span class="menu-title">داشبورد</span>
+                        <span class="menu-title">@lang('sidebar.dashboard')</span>
                     </a>
                 </div>
 
-                @if (request()->segment(1) == 'admin')
+                @if (auth()->user()->isAdmin == 1)
                     <div class="menu-item">
                         <a class="menu-link" href="{{ route('users') }}">
                             <span class="menu-icon">
@@ -44,7 +44,7 @@
                                     </svg>
                                 </span>
                             </span>
-                            <span class="menu-title">کاربران</span>
+                            <span class="menu-title">@lang('sidebar.users')</span>
                         </a>
                     </div>
 
@@ -58,7 +58,7 @@
                                     </svg>
                                 </span>
                             </span>
-                            <span class="menu-title">امتحان ها</span>
+                            <span class="menu-title">@lang('sidebar.exams')</span>
                         </a>
                     </div>
 
@@ -72,7 +72,7 @@
                                     </svg>
                                 </span>
                             </span>
-                            <span class="menu-title">درس ها</span>
+                            <span class="menu-title">@lang('sidebar.lessons')</span>
                         </a>
                     </div>
                 @else
@@ -87,7 +87,7 @@
                                     </svg>
                                 </span>
                             </span>
-                            <span class="menu-title">امتحان ها</span>
+                            <span class="menu-title">@lang('sidebar.exams')</span>
                         </a>
                     </div>
 
@@ -101,7 +101,7 @@
                                     </svg>
                                 </span>
                             </span>
-                            <span class="menu-title">کارنامه ها</span>
+                            <span class="menu-title">@lang('sidebar.records')</span>
                         </a>
                     </div>
 
@@ -112,7 +112,7 @@
 
     <div class="aside-footer flex-column-auto pt-5 pb-7 px-5" id="kt_aside_footer">
         <a href="{{ route('logout') }}" class="btn btn-custom btn-primary w-100" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss-="click" title="برای خروج کلیک نماید.">
-            <span class="btn-label">خروج</span>
+            <span class="btn-label">@lang('sidebar.logout')</span>
             <span class="svg-icon btn-icon svg-icon-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <path opacity="0.3" d="M19 22H5C4.4 22 4 21.6 4 21V3C4 2.4 4.4 2 5 2H14L20 8V21C20 21.6 19.6 22 19 22ZM15 17C15 16.4 14.6 16 14 16H8C7.4 16 7 16.4 7 17C7 17.6 7.4 18 8 18H14C14.6 18 15 17.6 15 17ZM17 12C17 11.4 16.6 11 16 11H8C7.4 11 7 11.4 7 12C7 12.6 7.4 13 8 13H16C16.6 13 17 12.6 17 12ZM17 7C17 6.4 16.6 6 16 6H8C7.4 6 7 6.4 7 7C7 7.6 7.4 8 8 8H16C16.6 8 17 7.6 17 7Z" fill="black" />

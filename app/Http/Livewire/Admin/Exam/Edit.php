@@ -14,8 +14,11 @@ class Edit extends Component
     public $slug;
     public $lesson_id;
     public $date;
+    public $date_end;
     public $time;
+    public $time_end;
     public $period;
+    public $random;
 
 
     public $exams;
@@ -26,15 +29,19 @@ class Edit extends Component
 
     public function mount()
     {
-        $this->exams = Question::where('exam_id', $this->exam->id)->orderByDesc('id')->get();
+        //->orderByDesc('id')
+        $this->exams = Question::where('exam_id', $this->exam->id)->get();
         $this->newExams = collect([]);
 
         $this->title = $this->exam->title;
         $this->slug = $this->exam->slug;
         $this->lesson_id = $this->exam->lesson_id;
         $this->date = $this->exam->date;
+        $this->date_end = $this->exam->date_end;
         $this->time = $this->exam->time;
+        $this->time_end = $this->exam->time_end;
         $this->period = $this->exam->period;
+        $this->random = $this->exam->random;
 
         if( isset(request()->redirect) && ! is_null(request()->redirect) && request()->redirect == 1 )
             $this->redirect = true;

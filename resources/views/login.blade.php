@@ -18,11 +18,12 @@
                     <!--begin::Heading-->
                     <div class="mb-10 text-center">
                         <!--begin::Title-->
-                        <h1 class="text-dark mb-3">ورود </h1>
+                        <h1 class="text-dark mb-3"> @lang('login.login') </h1>
                         <!--end::Title-->
                         <!--begin::Link-->
-                        <div class="text-gray-400 fw-bold fs-4">حساب جدید ایجاد میکنید ؟
-                            <a href="{{ route('register') }}" class="link-primary ">اینجا وارد شوید</a></div>
+                        <div class="text-gray-400 fw-bold fs-4">
+                            @lang('login.createNew')
+                            <a href="{{ route('register') }}" class="link-primary ">@lang('login.click')</a></div>
                         <!--end::Link-->
                     </div>
                     <!--end::Heading-->
@@ -31,7 +32,7 @@
                       <!--begin::Input group-->
                       <div class="row fv-row mb-7">
                         <!--begin::Col-->
-                            <label class="form-label  text-dark fs-6"> نام کاربری یا ایمیل </label>
+                            <label class="form-label  text-dark fs-6"> @lang('login.usernameEmail') </label>
                             <input class="form-control form-control-lg form-control-solid" name="username" id="kt_inputmask_11" inputmode="text" value="{{ old('username') }}">
                             @error('username')
                                 <div class="fv-plugins-message-container invalid-feedback"><div data-field="first-name" data-validator="notEmpty">{{ $message }}</div></div>
@@ -39,14 +40,14 @@
                     </div>
                     <!--end::Input group-->
 
-                    
+
 
                     <!--begin::Input group-->
                     <div class="mb-10 fv-row" data-kt-password-meter="true">
                         <!--begin::Wrapper-->
                         <div class="mb-1">
                             <!--begin::Label-->
-                            <label class="form-label  text-dark fs-6">کلمه عبور</label>
+                            <label class="form-label  text-dark fs-6">@lang('login.password')</label>
                             <!--end::Label-->
                             <!--begin::Input wrapper-->
                             <div class="position-relative mb-3">
@@ -76,9 +77,7 @@
                     <!--begin::Actions-->
                     <div>
                         <button type="submit" id="kt_sign_up_submit" class="btn btn-lg btn-primary">
-                            <span class="indicator-label">ارسال</span>
-                            <span class="indicator-progress">لطفا صبر کنید...
-									<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                            <span class="indicator-label">@lang('login.send')</span>
                         </button>
                     </div>
                     <!--end::Actions-->
